@@ -1,0 +1,3 @@
+select avg(nota) from alumno-prueba where prueba_id in (
+    select id from prueba group by curso_id
+) group by alumno_id;

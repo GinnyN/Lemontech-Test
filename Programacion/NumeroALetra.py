@@ -1,4 +1,3 @@
-tens = [ 1, 10, 100, 1000 ]
 nombres = [
     ["cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve"],
     [False, "diez", "veinte", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa"],
@@ -27,7 +26,7 @@ def numberName(n):
                 elif nombres[i][digitInt] + " y " + nombres[i][lastDigit] == "diez y cinco": nameString == "quince "+ nameString
                 else: nameString = nombres[i][digitInt] + " y " + nameString
             else:
-                nameString = nombres[i][digitInt] + nameString
+                nameString = nombres[i][digitInt] + " " + nameString
         i += 1
         lastDigit = digitInt
     return nameString

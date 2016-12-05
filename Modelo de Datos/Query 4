@@ -1,0 +1,5 @@
+select alumno_id from alumno-prueba where (
+    select avg(nota) from alumno-prueba where prueba_id in (
+        select id from prueba group by curso_id
+    ) 
+) < 4

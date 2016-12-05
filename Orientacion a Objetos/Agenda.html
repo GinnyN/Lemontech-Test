@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .agenda{
+            width: 960px;
+            margin: 0 auto;
+        }
+        .dia{
+            float: left;
+            width: 20%;
+        }
+        .cell{
+            padding: 5px;
+            margin: 5px;
+        }
+        .busy{
+            background: red;
+            color: white;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.0-rc.2/angular.min.js"></script>
+    <script src="http://momentjs.com/downloads/moment.js"></script>
+    <script>
+        angular.module("myApp",[]).controller("testCtrl",testCtrl);
+
+        function testCtrl(){
+            this.name = "Ximena";
+            this.visitas = {
+lunes: [
+{nombre: 'Daniel', hora_inicio: '08:00', hora_termino: '09:00'},
+{nombre: 'Daniel', hora_inicio: '09:30', hora_termino: '11:00'},
+{nombre: 'Daniel', hora_inicio: '15:00', hora_termino: '16:00'},
+{nombre: 'Daniel', hora_inicio: '17:00', hora_termino: '19:30'}
+],
+martes: [
+{nombre: 'Daniel', hora_inicio: '08:00', hora_termino: '09:00'},
+{nombre: 'Daniel', hora_inicio: '11:30', hora_termino: '12:00'},
+{nombre: 'Daniel', hora_inicio: '15:00', hora_termino: '16:00'},
+{nombre: 'Daniel', hora_inicio: '17:00', hora_termino: '19:30'}
+],
+miercoles: [
+{nombre: 'Daniel', hora_inicio: '08:00', hora_termino: '09:00'},
+{nombre: 'Daniel', hora_inicio: '10:30', hora_termino: '12:00'},
+{nombre: 'Daniel', hora_inicio: '15:00', hora_termino: '16:00'},
+{nombre: 'Daniel', hora_inicio: '17:00', hora_termino: '19:30'}
+],
+jueves: [
+{nombre: 'Daniel', hora_inicio: '08:00', hora_termino: '09:00'},
+{nombre: 'Daniel', hora_inicio: '09:30', hora_termino: '12:00'},
+{nombre: 'Daniel', hora_inicio: '15:00', hora_termino: '16:00'},
+{nombre: 'Daniel', hora_inicio: '17:00', hora_termino: '19:30'}
+],
+viernes: [
+{nombre: 'Daniel', hora_inicio: '08:00', hora_termino: '09:00'},
+{nombre: 'Daniel', hora_inicio: '09:30', hora_termino: '12:00'},
+{nombre: 'Daniel', hora_inicio: '15:00', hora_termino: '16:00'},
+{nombre: 'Daniel', hora_inicio: '17:00', hora_termino: '19:30'}
+],
+}
+    this.blocksLunes = [];
+    y = 0;
+    for (i=7;i<20;i++){
+        currentBlock = moment().hours(i).minutes(0);
+        usedBlockFirst = moment().hours(parseInt(this.visitas.lunes[y].hora_inicio.split(":")[0]))
+                            .minutes(parseInt(this.visitas.lunes[y].hora_inicio.split(":")[1]));
+        usedBlockLast = moment().hours(parseInt(this.visitas.lunes[y].hora_termino.split(":")[0]))
+                            .minutes(parseInt(this.visitas.lunes[y].hora_termino.split(":")[1]));
+        
+       if (currentBlock.isSameOrAfter(usedBlockFirst) && currentBlock.isSameOrBefore(usedBlockLast)){
+            this.blocksLunes.push({name: this.visitas.lunes[y].nombre, class:"busy", init:currentBlock});
+        }else{
+            this.blocksLunes.push({name: "", class:"free",init:currentBlock});
+        }
+        
+        if (currentBlock.isSameOrAfter(usedBlockLast)){
+            y++;
+        }
+
+        currentBlock = moment().hours(i).minutes(30);
+        usedBlockFirst = moment().hours(parseInt(this.visitas.lunes[y].hora_inicio.split(":")[0]))
+                            .minutes(parseInt(this.visitas.lunes[y].hora_inicio.split(":")[1]));
+        usedBlockLast = moment().hours(parseInt(this.visitas.lunes[y].hora_termino.split(":")[0]))
+                            .minutes(parseInt(this.visitas.lunes[y].hora_termino.split(":")[1]));
+        
+        if (currentBlock.isSameOrAfter(usedBlockFirst) && currentBlock.isSameOrBefore(usedBlockLast)){
+          this.blocksLunes.push({name: this.visitas.lunes[y].nombre, class:"busy", init:currentBlock});
+        }else{
+            this.blocksLunes.push({name: "", class:"free",init:currentBlock});
+        }
+        
+        if (currentBlock.isSameOrAfter(usedBlockLast)){
+            y++;
+        }
+
+    }
+    this.blocksMartes = [];
+    y = 0;
+    for (i=7;i<20;i++){
+        currentBlock = moment().hours(i).minutes(0);
+        usedBlockFirst = moment().hours(parseInt(this.visitas.martes[y].hora_inicio.split(":")[0]))
+                            .minutes(parseInt(this.visitas.martes[y].hora_inicio.split(":")[1]));
+        usedBlockLast = moment().hours(parseInt(this.visitas.martes[y].hora_termino.split(":")[0]))
+                            .minutes(parseInt(this.visitas.martes[y].hora_termino.split(":")[1]));
+        
+       if (currentBlock.isSameOrAfter(usedBlockFirst) && currentBlock.isSameOrBefore(usedBlockLast)){
+            this.blocksMartes.push({name: this.visitas.martes[y].nombre, class:"busy", init:currentBlock});
+        }else{
+            this.blocksMartes.push({name: "", class:"free",init:currentBlock});
+        }
+        
+        if (currentBlock.isSameOrAfter(usedBlockLast)){
+            y++;
+        }
+
+        currentBlock = moment().hours(i).minutes(30);
+        usedBlockFirst = moment().hours(parseInt(this.visitas.martes[y].hora_inicio.split(":")[0]))
+                            .minutes(parseInt(this.visitas.martes[y].hora_inicio.split(":")[1]));
+        usedBlockLast = moment().hours(parseInt(this.visitas.martes[y].hora_termino.split(":")[0]))
+                            .minutes(parseInt(this.visitas.martes[y].hora_termino.split(":")[1]));
+        
+       if (currentBlock.isSameOrAfter(usedBlockFirst) && currentBlock.isSameOrBefore(usedBlockLast)){
+            this.blocksMartes.push({name: this.visitas.martes[y].nombre, class:"busy", init:currentBlock});
+        }else{
+            this.blocksMartes.push({name: "", class:"free",init:currentBlock});
+        }
+        
+        if (currentBlock.isSameOrAfter(usedBlockLast)){
+            y++;
+        }
+
+    }
+    this.blocksMiercoles = [];
+    y = 0;
+    for (i=7;i<20;i++){
+        currentBlock = moment().hours(i).minutes(0);
+        usedBlockFirst = moment().hours(parseInt(this.visitas.miercoles[y].hora_inicio.split(":")[0]))
+                            .minutes(parseInt(this.visitas.miercoles[y].hora_inicio.split(":")[1]));
+        usedBlockLast = moment().hours(parseInt(this.visitas.miercoles[y].hora_termino.split(":")[0]))
+                            .minutes(parseInt(this.visitas.miercoles[y].hora_termino.split(":")[1]));
+        
+       if (currentBlock.isSameOrAfter(usedBlockFirst) && currentBlock.isSameOrBefore(usedBlockLast)){
+            this.blocksMiercoles.push({name: this.visitas.miercoles[y].nombre, class:"busy", init:currentBlock});
+        }else{
+            this.blocksMiercoles.push({name: "", class:"free",init:currentBlock});
+        }
+        
+        if (currentBlock.isSameOrAfter(usedBlockLast)){
+            y++;
+        }
+
+        currentBlock = moment().hours(i).minutes(30);
+        usedBlockFirst = moment().hours(parseInt(this.visitas.miercoles[y].hora_inicio.split(":")[0]))
+                            .minutes(parseInt(this.visitas.miercoles[y].hora_inicio.split(":")[1]));
+        usedBlockLast = moment().hours(parseInt(this.visitas.miercoles[y].hora_termino.split(":")[0]))
+                            .minutes(parseInt(this.visitas.miercoles[y].hora_termino.split(":")[1]));
+        
+       if (currentBlock.isSameOrAfter(usedBlockFirst) && currentBlock.isSameOrBefore(usedBlockLast)){
+            this.blocksMiercoles.push({name: this.visitas.miercoles[y].nombre, class:"busy", init:currentBlock});
+        }else{
+            this.blocksMiercoles.push({name: "", class:"free",init:currentBlock});
+        }
+        
+        if (currentBlock.isSameOrAfter(usedBlockLast)){
+            y++;
+        }
+
+    }
+    this.blocksJueves = [];
+    y = 0;
+    for (i=7;i<20;i++){
+        currentBlock = moment().hours(i).minutes(0);
+        usedBlockFirst = moment().hours(parseInt(this.visitas.jueves[y].hora_inicio.split(":")[0]))
+                            .minutes(parseInt(this.visitas.jueves[y].hora_inicio.split(":")[1]));
+        usedBlockLast = moment().hours(parseInt(this.visitas.jueves[y].hora_termino.split(":")[0]))
+                            .minutes(parseInt(this.visitas.jueves[y].hora_termino.split(":")[1]));
+        
+       if (currentBlock.isSameOrAfter(usedBlockFirst) && currentBlock.isSameOrBefore(usedBlockLast)){
+            this.blocksJueves.push({name: this.visitas.jueves[y].nombre, class:"busy", init:currentBlock});
+        }else{
+            this.blocksJueves.push({name: "", class:"free",init:currentBlock});
+        }
+        
+        if (currentBlock.isSameOrAfter(usedBlockLast)){
+            y++;
+        }
+
+        currentBlock = moment().hours(i).minutes(30);
+         usedBlockFirst = moment().hours(parseInt(this.visitas.jueves[y].hora_inicio.split(":")[0]))
+                            .minutes(parseInt(this.visitas.jueves[y].hora_inicio.split(":")[1]));
+        usedBlockLast = moment().hours(parseInt(this.visitas.jueves[y].hora_termino.split(":")[0]))
+                            .minutes(parseInt(this.visitas.jueves[y].hora_termino.split(":")[1]));
+        
+       if (currentBlock.isSameOrAfter(usedBlockFirst) && currentBlock.isSameOrBefore(usedBlockLast)){
+            this.blocksJueves.push({name: this.visitas.jueves[y].nombre, class:"busy", init:currentBlock});
+        }else{
+            this.blocksJueves.push({name: "", class:"free",init:currentBlock});
+        }
+        
+        if (currentBlock.isSameOrAfter(usedBlockLast)){
+            y++;
+        }
+
+    }
+    this.blocksViernes = [];
+    y = 0;
+    for (i=7;i<20;i++){
+        currentBlock = moment().hours(i).minutes(0);
+        usedBlockFirst = moment().hours(parseInt(this.visitas.viernes[y].hora_inicio.split(":")[0]))
+                            .minutes(parseInt(this.visitas.viernes[y].hora_inicio.split(":")[1]));
+        usedBlockLast = moment().hours(parseInt(this.visitas.viernes[y].hora_termino.split(":")[0]))
+                            .minutes(parseInt(this.visitas.viernes[y].hora_termino.split(":")[1]));
+        
+       if (currentBlock.isSameOrAfter(usedBlockFirst) && currentBlock.isSameOrBefore(usedBlockLast)){
+            this.blocksViernes.push({name: this.visitas.viernes[y].nombre, class:"busy", init:currentBlock});
+        }else{
+            this.blocksViernes.push({name: "", class:"free",init:currentBlock});
+        }
+        
+        if (currentBlock.isSameOrAfter(usedBlockLast)){
+            y++;
+        }
+
+        currentBlock = moment().hours(i).minutes(30);
+         usedBlockFirst = moment().hours(parseInt(this.visitas.viernes[y].hora_inicio.split(":")[0]))
+                            .minutes(parseInt(this.visitas.viernes[y].hora_inicio.split(":")[1]));
+        usedBlockLast = moment().hours(parseInt(this.visitas.viernes[y].hora_termino.split(":")[0]))
+                            .minutes(parseInt(this.visitas.viernes[y].hora_termino.split(":")[1]));
+        
+       if (currentBlock.isSameOrAfter(usedBlockFirst) && currentBlock.isSameOrBefore(usedBlockLast)){
+            this.blocksViernes.push({name: this.visitas.viernes[y].nombre, class:"busy", init:currentBlock});
+        }else{
+            this.blocksViernes.push({name: "", class:"free",init:currentBlock});
+        }
+        
+        if (currentBlock.isSameOrAfter(usedBlockLast)){
+            y++;
+        }
+
+    }
+ }
+    </script>
+  </head>
+
+  <body ng-app="myApp">
+    <div ng-controller="testCtrl as test">
+        <div class="agenda">
+            <div class="dia">
+                <div class="cell">Lunes</div>
+                <div ng-repeat="block in test.blocksLunes" class="cell" ng-class="block.class">
+                    {{("00" + block.init.toObject().hours).slice(-2)}}:{{("00" + block.init.toObject().minutes).slice(-2)}}:{{block.name}}
+                </div>
+            </div>
+            <div class="dia">
+                <div class="cell">Martes</div>
+                <div ng-repeat="block in test.blocksMartes" class="cell" ng-class="block.class">
+                    {{("00" + block.init.toObject().hours).slice(-2)}}:{{("00" + block.init.toObject().minutes).slice(-2)}}:{{block.name}}
+                </div>
+            </div>
+            <div class="dia">
+                <div class="cell">Miercoles</div>
+                <div ng-repeat="block in test.blocksMiercoles" class="cell" ng-class="block.class">
+                    {{("00" + block.init.toObject().hours).slice(-2)}}:{{("00" + block.init.toObject().minutes).slice(-2)}}:{{block.name}}
+                </div>
+            </div>
+            <div class="dia">
+                <div class="cell">Jueves</div>
+                <div ng-repeat="block in test.blocksJueves" class="cell" ng-class="block.class">
+                    {{("00" + block.init.toObject().hours).slice(-2)}}:{{("00" + block.init.toObject().minutes).slice(-2)}}:{{block.name}}
+                </div>
+            </div>
+            <div class="dia">
+                <div class="cell">Viernes</div>
+                <div ng-repeat="block in test.blocksViernes" class="cell" ng-class="block.class">
+                    {{("00" + block.init.toObject().hours).slice(-2)}}:{{("00" + block.init.toObject().minutes).slice(-2)}}:{{block.name}}
+                </div>
+            </div>
+        </div>
+    </div>
+  </body>
+
+</html>

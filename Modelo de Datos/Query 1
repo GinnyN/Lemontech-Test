@@ -1,0 +1,5 @@
+select * from alumnos where id in (
+    select alumnos_id from alumno-curso where curso_id = (
+        select id from curso where nombre = "programacion"
+    )
+)
